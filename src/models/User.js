@@ -9,9 +9,15 @@ const User = db.define('User', {
         autoIncrement: true,
         primaryKey: true
     },
-    content: DataTypes.STRING(300),
-    createdAt: Sequelize.DATE,
-    updatedAt: Sequelize.DATE
+    username: {
+        type: DataTypes.STRING(37),
+        allowNull: false,
+        unique: true
+    },
+    password: {
+        type: DataTypes.STRING(20),
+        allowNull: false
+    }
 });
 
 module.exports = User;

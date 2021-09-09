@@ -21,12 +21,12 @@ router.use((err, req, res, next) => {
     if (err) { return res.send(err.message); }
 });
 
+Tweet.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 User.hasMany(Tweet);
-Tweet.belongsTo(User);
 
 db.authenticate().then(async (data) => {
     console.log('connected');
-    await db.sync({ alter: true });
+    await db.sync({ force: true });
     await app.listen(PORT, err => {
         if (err) {
             return console.log(`can nor liston on port : ${PORT}`);
